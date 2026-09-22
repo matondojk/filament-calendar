@@ -4,9 +4,8 @@ A robust and customizable calendar plugin designed specifically for **Filament v
 
 ## Requirements
 
-- PHP 8.2+
-- Laravel 11.0+
-- Filament v5.0+
+- Laravel
+- Filament v5
 
 ## Installation
 
@@ -33,10 +32,31 @@ public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            FilamentCalendarPlugin::make(),
+            FilamentCalendarPlugin::make()
+                ->selectable()
+                ->editable(),
         ]);
 }
 ```
+
+### Adding the Calendar Widget
+
+You can add the calendar widget to any of your pages or dashboard by returning it in the `getWidgets()` method:
+
+```php
+use Matondojk\FilamentCalendar\Widgets\CalendarWidget;
+
+protected function getWidgets(): array
+{
+    return [
+        CalendarWidget::class,
+    ];
+}
+```
+
+### Providing Events
+
+To display events, create an Eloquent model and implement the `HasCalendarEvents` interface, or simply pass a closure to the calendar configuration to fetch your events dynamically.
 
 ## Changelog
 
