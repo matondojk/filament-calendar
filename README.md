@@ -15,10 +15,18 @@ You can install the package via composer:
 composer require matondojk/filament-calendar
 ```
 
-Optionally, you can publish the views using:
+You must run the migrations for the calendar events to work properly. You can publish and run them with:
+
+```bash
+php artisan vendor:publish --tag="filament-calendar-migrations"
+php artisan migrate
+```
+
+Optionally, you can publish the views and translations using:
 
 ```bash
 php artisan vendor:publish --tag="filament-calendar-views"
+php artisan vendor:publish --tag="filament-calendar-translations"
 ```
 
 ## Usage

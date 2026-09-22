@@ -20,6 +20,10 @@ class FilamentCalendarServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/lang' => resource_path('lang/vendor/filament-calendar'),
             ], 'filament-calendar-translations');
+
+            $this->publishes([
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
+            ], 'filament-calendar-migrations');
         }
     }
 
