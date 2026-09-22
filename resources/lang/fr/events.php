@@ -1,0 +1,59 @@
+<?php
+
+return [
+    'notifications' => [
+        'new_invitation_title' => 'Nouvelle Invitation : :title',
+        'new_invitation_body' => 'Vous avez été invité à un nouvel événement le :date',
+        'reminder_title' => 'Rappel : :title',
+        'reminder_body' => 'L\'événement commencera dans 24 heures : :date',
+    ],
+    'emails' => [
+        'invitation_subject' => 'Invitation : :title',
+        'reminder_subject' => 'Rappel d\'Événement : :title',
+        'reminder_body' => 'Rappel : L\'événement \':title\' commencera dans 24 heures le :date. :location',
+        'invitation_header' => 'Vous avez été invité à un événement !',
+        'details' => 'Détails :',
+        'footer' => 'Vous pouvez accéder au tableau de bord pour confirmer ou refuser votre présence. De plus, un fichier de calendrier .ics est joint à cet e-mail afin que vous puissiez l\'ajouter à votre calendrier personnel.',
+    ],
+    'resource' => [
+        'navigation_label' => 'Événements',
+        'model_label' => 'Événement',
+        'plural_model_label' => 'Événements',
+        'form' => [
+            'event_details' => 'Détails de l\'événement',
+            'event_details_desc' => 'Informations principales sur l\'événement.',
+            'title' => 'Titre de l\'événement',
+            'description' => 'Description',
+            'starts_at' => 'Commence à',
+            'ends_at' => 'Se termine à',
+            'format' => 'Format de l\'événement',
+            'in_person' => 'En personne',
+            'virtual' => 'Virtuel',
+            'platform' => 'Plateforme',
+            'meeting_link' => 'Lien de la réunion',
+            'open_link' => 'Ouvrir le lien',
+            'location' => 'Lieu physique',
+            'participants' => 'Participants',
+            'participants_desc' => 'Sélectionnez les utilisateurs à inviter à cet événement.',
+            'guests' => 'Invités',
+        ],
+        'table' => [
+            'title' => 'Titre',
+            'creator' => 'Créateur',
+            'starts_at' => 'Commence à',
+            'ends_at' => 'Se termine à',
+            'format' => 'Format',
+            'where' => 'Où',
+            'guests' => 'Invités',
+            'upcoming' => 'Événements à venir',
+        ],
+        'actions' => [
+            'create_event' => 'Nouvel Événement',
+        ],
+        'tabs' => [
+            'all' => 'Tous les événements',
+            'my_events' => 'Mes événements',
+            'invited' => 'Invités',
+        ],
+    ],
+];

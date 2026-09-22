@@ -1,0 +1,30 @@
+<?php
+
+namespace Matondojk\FilamentCalendar;
+
+use Illuminate\Support\ServiceProvider;
+
+class FilamentCalendarServiceProvider extends ServiceProvider
+{
+    public function boot(): void
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'filament-calendar');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'filament-calendar');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/filament-calendar'),
+            ], 'filament-calendar-views');
+
+            $this->publishes([
+                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/filament-calendar'),
+            ], 'filament-calendar-translations');
+        }
+    }
+
+    public function register(): void
+    {
+        //
+    }
+}
