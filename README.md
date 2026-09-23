@@ -31,25 +31,26 @@ php artisan vendor:publish --tag="filament-calendar-translations"
 
 ## Usage
 
-Register the plugin in your Filament panel configuration:
+To use the calendar, you simply need to register the `CalendarWidget` in your Filament Panel Provider (usually `AdminPanelProvider.php`), or in a specific page.
+
+Registering globally in your Panel Provider:
 
 ```php
-use Matondojk\FilamentCalendar\FilamentCalendarPlugin;
+use Matondojk\FilamentCalendar\Widgets\CalendarWidget;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
-        ->plugins([
-            FilamentCalendarPlugin::make()
-                ->selectable()
-                ->editable(),
+        // ...
+        ->widgets([
+            Widgets\AccountWidget::class,
+            Widgets\FilamentInfoWidget::class,
+            CalendarWidget::class,
         ]);
 }
 ```
 
-### Adding the Calendar Widget
-
-You can add the calendar widget to any of your pages or dashboard by returning it in the `getWidgets()` method:
+Or registering in a specific Page (e.g. `Dashboard.php`):
 
 ```php
 use Matondojk\FilamentCalendar\Widgets\CalendarWidget;
@@ -62,9 +63,7 @@ protected function getWidgets(): array
 }
 ```
 
-### Providing Events
-
-To display events, create an Eloquent model and implement the `HasCalendarEvents` interface, or simply pass a closure to the calendar configuration to fetch your events dynamically.
+The calendar will automatically pull events using the default `Event` model provided by the package.
 
 ## Changelog
 
