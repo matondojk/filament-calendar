@@ -65,6 +65,16 @@ protected function getWidgets(): array
 
 The calendar will automatically pull events using the default `Event` model provided by the package.
 
+## Customizing the Event Resource
+
+If you need to customize the table columns, form fields, or logic of the Event Resource, you can publish the complete resource directly into your application's `app/Filament/Resources` directory by running:
+
+```bash
+php artisan filament-calendar:publish-resource
+```
+
+This command will copy the `EventResource` (along with its Pages, Schemas, and Tables) and automatically update all the namespaces to match your App namespace. After running this, you'll find the customizable resource at `app/Filament/Resources/EventResource/EventResource.php`!
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

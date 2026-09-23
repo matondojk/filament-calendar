@@ -24,6 +24,14 @@ class FilamentCalendarServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../database/migrations' => database_path('migrations'),
             ], 'filament-calendar-migrations');
+
+            $this->publishes([
+                __DIR__ . '/../src/Resources/Events' => app_path('Filament/Resources/EventResource'),
+            ], 'filament-calendar-resource');
+
+            $this->commands([
+                \Matondojk\FilamentCalendar\Commands\PublishResourceCommand::class,
+            ]);
         }
 
         \Filament\Support\Facades\FilamentAsset::register([
