@@ -1,15 +1,15 @@
 <x-filament-widgets::widget>
     <x-filament::card>
         <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
-            <div class="flex items-center gap-3">
-                <div class="p-2 bg-primary-50 dark:bg-primary-500/10 rounded-xl shadow-sm border border-primary-100 dark:border-primary-500/20">
-                    <x-filament::icon icon="heroicon-o-calendar-days" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-primary-500/10 dark:bg-primary-500/10 rounded-full flex items-center justify-center">
+                    <x-filament::icon icon="heroicon-m-calendar-days" class="w-7 h-7 text-primary-600 dark:text-primary-400" />
                 </div>
                 <div>
-                    <h2 class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white capitalize leading-none">
+                    <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize leading-none">
                         {{ Str::ucfirst(\Carbon\Carbon::create($currentYear, $currentMonth, 1)->translatedFormat('F Y')) }}
                     </h2>
-                    <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mt-1">
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-1">
                         {{ __('filament-calendar::calendar.widget_subtitle') }}
                     </p>
                 </div>
