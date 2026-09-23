@@ -12,4 +12,9 @@ return [
      */
     'navigation_sort' => 1,
 
+    /**
+     * Determine if invitation emails should be sent automatically when a user is added to an event.
+     */
+    'send_invitation_emails' => true,
+
 ];

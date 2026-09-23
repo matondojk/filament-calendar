@@ -18,8 +18,10 @@ class EventUser extends Pivot
             $user = User::find($pivot->user_id);
 
             if ($event && $user) {
-                \Illuminate\Support\Facades\Log::info("Pivot created for Event {$event->id}, User {$user->id}. Dispatching invitation.");
-                SendEventInvitationJob::dispatch($event, collect([$user]));
+                if (config('filament-event-calendar.send_invitation_emails', true)) {
+                    \Illuminate\Support\Facades\Log::info("Pivot created for Event {$event->id}, User {$user->id}. Dispatching invitation.");
+                    SendEventInvitationJob::dispatch($event, collect([$user]));
+                }
             }
         });
     }

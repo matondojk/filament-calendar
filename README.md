@@ -68,12 +68,14 @@ public function panel(Panel $panel): Panel
     return $panel
         // ...
         ->plugins([
+            // 1. Register the plugin here!
             FilamentEventCalendarPlugin::make(),
         ])
         ->widgets([
             Widgets\AccountWidget::class,
             Widgets\FilamentInfoWidget::class,
-            CalendarWidget::class, // Register the calendar widget here!
+            // 2. Register the calendar widget here! (You can change its position)
+            CalendarWidget::class, 
         ]);
 }
 ```
@@ -99,7 +101,7 @@ Schedule::job(new EventReminderJob)->hourly();
 
 If you published the configuration file, it will be located at `config/filament-event-calendar.php`. 
 
-You can define if the `EventResource` should appear in the left sidebar and in which position:
+You can define if the `EventResource` should appear in the left sidebar, in which position, and whether automated emails should be dispatched:
 
 ```php
 return [
@@ -108,8 +110,19 @@ return [
 
     // Set the navigation sort order for the Events link.
     'navigation_sort' => 1,
+
+    // Determine if invitation emails should be sent automatically when a user is added to an event.
+    'send_invitation_emails' => true,
 ];
 ```
+
+## Queues & Performance
+
+This package heavily relies on background jobs (like `SendEventInvitationJob` and `EventReminderJob`) to send emails without slowing down your application.
+
+**Highly Recommended:** Ensure you have a Queue worker running on your server (e.g., `php artisan queue:work`, or configure Supervisor/Horizon). If you do not configure queues, your application will send emails synchronously, which may cause slow page loads when creating events with many participants.
+
+If you don't want to send automatic email invitations at all, you can disable them by setting `'send_invitation_emails' => false` in the configuration file.
 
 ## Usage Concepts
 
