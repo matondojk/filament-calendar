@@ -23,12 +23,12 @@ class ListEvents extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make(fn() => __('events.resource.tabs.all'))
+            'all' => Tab::make(fn() => __('filament-calendar::events.resource.tabs.all'))
                 ->icon(Heroicon::OutlinedGlobeAlt),
-            'my_events' => Tab::make(fn() => __('events.resource.tabs.my_events'))
+            'my_events' => Tab::make(fn() => __('filament-calendar::events.resource.tabs.my_events'))
                 ->icon(Heroicon::OutlinedUser)
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('user_id', auth()->id())),
-            'invited' => Tab::make(fn() => __('events.resource.tabs.invited'))
+            'invited' => Tab::make(fn() => __('filament-calendar::events.resource.tabs.invited'))
                 ->icon(Heroicon::OutlinedEnvelope)
                 ->modifyQueryUsing(fn (Builder $query) => $query->whereHas('users', fn ($q) => $q->where('users.id', auth()->id()))),
         ];

@@ -19,7 +19,7 @@ class EventInvitationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('events.emails.invitation_subject', ['title' => $this->event->title]),
+            subject: __('filament-calendar::events.emails.invitation_subject', ['title' => $this->event->title]),
         );
     }
 

@@ -23,17 +23,17 @@ class EventResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('events.resource.navigation_label');
+        return __('filament-calendar::events.resource.navigation_label');
     }
 
     public static function getModelLabel(): string
     {
-        return __('events.resource.model_label');
+        return __('filament-calendar::events.resource.model_label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('events.resource.plural_model_label');
+        return __('filament-calendar::events.resource.plural_model_label');
     }
 
     protected static ?string $recordTitleAttribute = 'title';

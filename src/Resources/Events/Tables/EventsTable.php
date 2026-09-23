@@ -19,31 +19,31 @@ class EventsTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label(fn() => __('events.resource.table.title'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.title'))
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
 
                 TextColumn::make('owner.name')
-                    ->label(fn() => __('events.resource.table.creator'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.creator'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('starts_at')
-                    ->label(fn() => __('events.resource.table.starts_at'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.starts_at'))
                     ->dateTime('d/m/Y H:i')
                     ->sortable(),
 
                 TextColumn::make('ends_at')
-                    ->label(fn() => __('events.resource.table.ends_at'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.ends_at'))
                     ->dateTime('d/m/Y H:i')
                     ->sortable(),
 
                 TextColumn::make('format')
-                    ->label(fn() => __('events.resource.table.format'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.format'))
                     ->badge()
-                    ->formatStateUsing(fn (string $state) => $state === 'virtual' ? __('events.resource.form.virtual') : __('events.resource.form.in_person'))
+                    ->formatStateUsing(fn (string $state) => $state === 'virtual' ? __('filament-calendar::events.resource.form.virtual') : __('filament-calendar::events.resource.form.in_person'))
                     ->color(fn (string $state): string => match ($state) {
                         'virtual' => 'info',
                         'in_person' => 'success',
@@ -51,7 +51,7 @@ class EventsTable
                     }),
 
                 TextColumn::make('location_or_platform')
-                    ->label(fn() => __('events.resource.table.where'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.where'))
                     ->getStateUsing(function ($record) {
                         if ($record->format === 'virtual') {
                             return $record->platform;
@@ -64,7 +64,7 @@ class EventsTable
                     ->toggleable(),
 
                 TextColumn::make('users_count')
-                    ->label(fn() => __('events.resource.table.guests'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.guests'))
                     ->counts('users')
                     ->badge()
                     ->color('primary')
@@ -73,7 +73,7 @@ class EventsTable
             ->defaultSort('starts_at', 'desc')
             ->filters([
                 Filter::make('upcoming')
-                    ->label(fn() => __('events.resource.table.upcoming'))
+                    ->label(fn() => __('filament-calendar::events.resource.table.upcoming'))
                     ->query(fn (Builder $query): Builder => $query->where('starts_at', '>=', Carbon::now()))
                     ->toggle(),
             ])

@@ -27,8 +27,8 @@ class SendEventInvitationJob implements ShouldQueue
         foreach ($this->users as $user) {
             // Send Filament Database Notification
             Notification::make()
-                ->title(__('events.notifications.new_invitation_title', ['title' => $this->event->title]))
-                ->body(__('events.notifications.new_invitation_body', ['date' => $this->event->starts_at->translatedFormat('M j, Y')]))
+                ->title(__('filament-calendar::events.notifications.new_invitation_title', ['title' => $this->event->title]))
+                ->body(__('filament-calendar::events.notifications.new_invitation_body', ['date' => $this->event->starts_at->translatedFormat('M j, Y')]))
                 ->success()
                 ->sendToDatabase($user);
 

@@ -31,23 +31,23 @@ class EventReminderJob implements ShouldQueue
             foreach ($event->users as $user) {
                 // Database notification
                 Notification::make()
-                    ->title(__('events.notifications.reminder_title', ['title' => $event->title]))
-                    ->body(__('events.notifications.reminder_body', ['date' => $event->starts_at->translatedFormat('M j, Y H:i')]))
+                    ->title(__('filament-calendar::events.notifications.reminder_title', ['title' => $event->title]))
+                    ->body(__('filament-calendar::events.notifications.reminder_body', ['date' => $event->starts_at->translatedFormat('M j, Y H:i')]))
                     ->warning()
                     ->sendToDatabase($user);
 
                 // Email notification (simple raw email for reminder)
                 $locationStr = $event->format === 'virtual' 
-                    ? __('calendar.labels.meeting_link') . ': ' . $event->meeting_link 
-                    : __('calendar.labels.location') . ': ' . $event->location;
+                    ? __('filament-calendar::calendar.labels.meeting_link') . ': ' . $event->meeting_link 
+                    : __('filament-calendar::calendar.labels.location') . ': ' . $event->location;
                     
-                Mail::raw(__('events.emails.reminder_body', [
+                Mail::raw(__('filament-calendar::events.emails.reminder_body', [
                     'title' => $event->title,
                     'date' => $event->starts_at->translatedFormat('M j, Y H:i'),
                     'location' => $locationStr
                 ]), function ($message) use ($user, $event) {
                     $message->to($user->email)
-                        ->subject(__('events.emails.reminder_subject', ['title' => $event->title]));
+                        ->subject(__('filament-calendar::events.emails.reminder_subject', ['title' => $event->title]));
                 });
             }
         }
