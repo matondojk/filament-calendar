@@ -9,7 +9,7 @@
                     <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white capitalize leading-none">
                         {{ Str::ucfirst(\Carbon\Carbon::create($currentYear, $currentMonth, 1)->translatedFormat('F Y')) }}
                     </h2>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mt-1">
+                    <p class="text-sm font-medium text-gray-500 dark:text-zinc-400 mt-1">
                         {{ __('filament-calendar::calendar.widget_subtitle') }}
                     </p>
                 </div>
@@ -37,16 +37,16 @@
             </div>
         </div>
 
-        <div class="grid gap-px bg-gray-200 dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm ring-1 ring-gray-200 dark:ring-gray-800" style="grid-template-columns: repeat(7, minmax(0, 1fr));">
+        <div class="grid gap-px bg-gray-200 dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm ring-1 ring-gray-200 dark:ring-zinc-800" style="grid-template-columns: repeat(7, minmax(0, 1fr));">
             @foreach ([__('filament-calendar::calendar.days.sun'), __('filament-calendar::calendar.days.mon'), __('filament-calendar::calendar.days.tue'), __('filament-calendar::calendar.days.wed'), __('filament-calendar::calendar.days.thu'), __('filament-calendar::calendar.days.fri'), __('filament-calendar::calendar.days.sat')] as $dayName)
-                <div class="bg-gray-50 dark:bg-gray-800/50 p-2 text-center text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
+                <div class="bg-gray-50 dark:bg-zinc-800/50 p-2 text-center text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">
                     {{ Str::substr($dayName, 0, 3) }}
                 </div>
             @endforeach
 
             @foreach ($this->days as $day)
-                <div class="bg-white dark:bg-gray-900 p-1.5 flex flex-col gap-1 {{ $day['isCurrentMonth'] ? '' : 'opacity-50 bg-gray-50 dark:bg-gray-800/50' }}" style="min-height: 100px;">
-                    <div class="font-bold text-xs mb-1 {{ $day['date']->isToday() ? 'flex items-center justify-center w-6 h-6 rounded-full bg-primary-600 text-white shadow-sm mx-auto sm:mx-0 sm:ml-1' : 'text-center sm:text-left sm:ml-1 text-gray-700 dark:text-gray-300' }}">
+                <div class="bg-white dark:bg-zinc-900 p-1.5 flex flex-col gap-1 {{ $day['isCurrentMonth'] ? '' : 'opacity-50 bg-gray-50 dark:bg-zinc-800/50' }}" style="min-height: 100px;">
+                    <div class="font-bold text-xs mb-1 {{ $day['date']->isToday() ? 'flex items-center justify-center w-6 h-6 rounded-full bg-primary-600 text-white shadow-sm mx-auto sm:mx-0 sm:ml-1' : 'text-center sm:text-left sm:ml-1 text-gray-700 dark:text-zinc-300' }}">
                         {{ $day['date']->format('j') }}
                     </div>
                     
