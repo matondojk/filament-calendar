@@ -3,10 +3,11 @@
 namespace Matondojk\FilamentCalendar\Resources\Events\Tables;
 
 use Carbon\Carbon;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
@@ -78,7 +79,7 @@ class EventsTable
                     ->toggle(),
             ])
             ->recordActions([
-                \Filament\Tables\Actions\Action::make('add_to_calendar')
+                Action::make('add_to_calendar')
                     ->icon('heroicon-o-calendar-days')
                     ->label(fn() => __('filament-calendar::events.resource.actions.add_to_calendar'))
                     ->action(function ($record) {
