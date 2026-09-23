@@ -24,10 +24,6 @@ class FilamentEventCalendarPlugin implements Plugin
         $panel->resources([
             EventResource::class,
         ]);
-
-        $panel->widgets([
-            CalendarWidget::class,
-        ]);
     }
 
     public function boot(Panel $panel): void

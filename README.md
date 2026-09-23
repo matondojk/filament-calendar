@@ -26,7 +26,7 @@ A professional, fully customizable, and responsive event management plugin desig
 ## Requirements
 
 - PHP 8.2+
-- Laravel 10.0+ / 11.0+
+- Laravel 13.0+
 - Filament v5
 
 ## Installation
@@ -52,12 +52,16 @@ php artisan vendor:publish --tag="filament-event-calendar-config"
 
 ## Plugin Registration
 
-To use the calendar widget and the event resource, you must register the plugin in your Filament panel configuration.
+To use the event resource and the calendar widget, you must register them in your Filament panel configuration.
 
-Open your `app/Providers/Filament/AdminPanelProvider.php` and add the plugin:
+Open your `app/Providers/Filament/AdminPanelProvider.php`:
+
+1. Register the plugin to load the Events management resource.
+2. Register the `CalendarWidget` manually in the `widgets()` array. This gives you full control over the widget's position on your dashboard!
 
 ```php
 use Matondojk\FilamentEventCalendar\FilamentEventCalendarPlugin;
+use Matondojk\FilamentEventCalendar\Widgets\CalendarWidget;
 
 public function panel(Panel $panel): Panel
 {
@@ -65,6 +69,11 @@ public function panel(Panel $panel): Panel
         // ...
         ->plugins([
             FilamentEventCalendarPlugin::make(),
+        ])
+        ->widgets([
+            Widgets\AccountWidget::class,
+            Widgets\FilamentInfoWidget::class,
+            CalendarWidget::class, // Register the calendar widget here!
         ]);
 }
 ```
@@ -75,22 +84,13 @@ The package includes a job (`EventReminderJob`) that checks for upcoming events 
 
 To enable this feature, you must schedule the job to run hourly. 
 
-If you are using Laravel 11, add the following to your `routes/console.php`:
+Add the following to your `routes/console.php` (Laravel 11+):
 
 ```php
 use Matondojk\FilamentEventCalendar\Jobs\EventReminderJob;
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::job(new EventReminderJob)->hourly();
-```
-
-If you are using Laravel 10, add it to the `schedule` method in `app/Console/Kernel.php`:
-
-```php
-protected function schedule(Schedule $schedule): void
-{
-    $schedule->job(new \Matondojk\FilamentEventCalendar\Jobs\EventReminderJob)->hourly();
-}
 ```
 
 *Note: Ensure your server has the Laravel scheduler configured (cron).*
