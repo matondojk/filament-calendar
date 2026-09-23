@@ -37,15 +37,15 @@
             </div>
         </div>
 
-        <div class="grid gap-px bg-gray-200 dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-xl overflow-hidden shadow-sm" style="grid-template-columns: repeat(7, minmax(0, 1fr));">
+        <div class="grid gap-px bg-gray-200 dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm ring-1 ring-gray-200 dark:ring-gray-800" style="grid-template-columns: repeat(7, minmax(0, 1fr));">
             @foreach ([__('filament-calendar::calendar.days.sun'), __('filament-calendar::calendar.days.mon'), __('filament-calendar::calendar.days.tue'), __('filament-calendar::calendar.days.wed'), __('filament-calendar::calendar.days.thu'), __('filament-calendar::calendar.days.fri'), __('filament-calendar::calendar.days.sat')] as $dayName)
-                <div class="bg-gray-50 dark:bg-white/5 p-2 text-center text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
+                <div class="bg-gray-50 dark:bg-gray-800/50 p-2 text-center text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
                     {{ Str::substr($dayName, 0, 3) }}
                 </div>
             @endforeach
 
             @foreach ($this->days as $day)
-                <div class="bg-white dark:bg-gray-900 p-1.5 flex flex-col gap-1 {{ $day['isCurrentMonth'] ? '' : 'opacity-50 bg-gray-50 dark:bg-white/5' }}" style="min-height: 100px;">
+                <div class="bg-white dark:bg-gray-900 p-1.5 flex flex-col gap-1 {{ $day['isCurrentMonth'] ? '' : 'opacity-50 bg-gray-50 dark:bg-gray-800/50' }}" style="min-height: 100px;">
                     <div class="font-bold text-xs mb-1 {{ $day['date']->isToday() ? 'flex items-center justify-center w-6 h-6 rounded-full bg-primary-600 text-white shadow-sm mx-auto sm:mx-0 sm:ml-1' : 'text-center sm:text-left sm:ml-1 text-gray-700 dark:text-gray-300' }}">
                         {{ $day['date']->format('j') }}
                     </div>
