@@ -49,6 +49,7 @@ return [
         ],
         'actions' => [
             'create_event' => 'Novo Evento',
+            'add_to_calendar' => 'Add calendário',
         ],
         'tabs' => [
             'all' => 'Todos Eventos',

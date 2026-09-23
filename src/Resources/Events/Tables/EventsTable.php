@@ -78,6 +78,30 @@ class EventsTable
                     ->toggle(),
             ])
             ->recordActions([
+                \Filament\Tables\Actions\Action::make('add_to_calendar')
+                    ->icon('heroicon-o-calendar-days')
+                    ->label(fn() => __('filament-calendar::events.resource.actions.add_to_calendar'))
+                    ->action(function ($record) {
+                        $ics = "BEGIN:VCALENDAR\n" .
+                               "VERSION:2.0\n" .
+                               "PRODID:-//Filament Calendar//EN\n" .
+                               "BEGIN:VEVENT\n" .
+                               "UID:{$record->id}-" . time() . "@" . request()->getHost() . "\n" .
+                               "DTSTAMP:" . gmdate('Ymd\THis\Z') . "\n" .
+                               "DTSTART:" . $record->starts_at->setTimezone('UTC')->format('Ymd\THis\Z') . "\n" .
+                               "DTEND:" . $record->ends_at->setTimezone('UTC')->format('Ymd\THis\Z') . "\n" .
+                               "SUMMARY:" . str_replace("\n", "\\n", (string) $record->title) . "\n" .
+                               "DESCRIPTION:" . str_replace("\n", "\\n", (string) $record->description) . "\n" .
+                               "LOCATION:" . str_replace("\n", "\\n", (string) ($record->format === 'virtual' ? ($record->meeting_link ?? $record->platform) : $record->location)) . "\n" .
+                               "END:VEVENT\n" .
+                               "END:VCALENDAR";
+
+                        return response()->streamDownload(function () use ($ics) {
+                            echo $ics;
+                        }, 'event-' . $record->id . '.ics', [
+                            'Content-Type' => 'text/calendar; charset=utf-8',
+                        ]);
+                    }),
                 ViewAction::make(),
                 EditAction::make(),
             ])
