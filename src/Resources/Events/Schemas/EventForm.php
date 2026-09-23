@@ -32,6 +32,7 @@ class EventForm
 
                                 Textarea::make('description')
                                     ->label(fn() => __('filament-calendar::events.resource.form.description'))
+                                    ->required()
                                     ->rows(3),
 
                                 Grid::make(2)->schema([
