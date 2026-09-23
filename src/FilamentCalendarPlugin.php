@@ -21,11 +21,9 @@ class FilamentCalendarPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        if (config('filament-calendar.is_enabled', true)) {
-            $panel->resources([
-                EventResource::class,
-            ]);
-        }
+        $panel->resources([
+            EventResource::class,
+        ]);
 
         $panel->widgets([
             CalendarWidget::class,

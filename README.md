@@ -69,7 +69,6 @@ protected function getWidgets(): array
 
 In `config/filament-calendar.php`, you can customize how the package behaves:
 
-- `is_enabled`: Set to `false` to prevent the package from registering the default `EventResource`. This is useful if you publish the resource to customize it and don't want the package to map it.
 - `should_register_navigation`: Show or hide the Event Resource from the main sidebar.
 - `navigation_sort`: Control where the Event Resource appears in the sidebar.
 
