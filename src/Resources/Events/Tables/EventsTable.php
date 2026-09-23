@@ -18,6 +18,7 @@ class EventsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->recordAction('view')
             ->columns([
                 TextColumn::make('title')
                     ->label(fn() => __('filament-calendar::events.resource.table.title'))

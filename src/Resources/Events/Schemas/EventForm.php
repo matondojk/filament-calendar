@@ -47,6 +47,17 @@ class EventForm
                                         ->native(false),
                                 ]),
                             ]),
+
+                        Section::make(fn() => __('filament-calendar::events.resource.form.participants'))
+                            ->icon('heroicon-o-users')
+                            ->schema([
+                                Select::make('users')
+                                    ->label(fn() => __('filament-calendar::events.resource.form.guests'))
+                                    ->relationship('users', 'name')
+                                    ->multiple()
+                                    ->searchable()
+                                    ->preload(),
+                            ]),
                     ]),
 
                 \Filament\Schemas\Components\Group::make()
@@ -103,17 +114,6 @@ class EventForm
                                     ->visible(fn ($get) => $get('format') === 'in_person')
                                     ->required(fn ($get) => $get('format') === 'in_person')
                                     ->maxLength(255),
-                            ]),
-
-                        Section::make(fn() => __('filament-calendar::events.resource.form.participants'))
-                            ->icon('heroicon-o-users')
-                            ->schema([
-                                Select::make('users')
-                                    ->label(fn() => __('filament-calendar::events.resource.form.guests'))
-                                    ->relationship('users', 'name')
-                                    ->multiple()
-                                    ->searchable()
-                                    ->preload(),
                             ]),
                     ]),
             ]);
