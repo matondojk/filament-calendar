@@ -29,28 +29,30 @@ php artisan vendor:publish --tag="filament-calendar-views"
 php artisan vendor:publish --tag="filament-calendar-translations"
 ```
 
+You can also publish the configuration file to customize the plugin's behavior:
+
+```bash
+php artisan vendor:publish --tag="filament-calendar-config"
+```
+
 ## Usage
 
-To use the calendar, you simply need to register the `CalendarWidget` in your Filament Panel Provider (usually `AdminPanelProvider.php`), or in a specific page.
-
-Registering globally in your Panel Provider:
+To use the calendar, register the `FilamentCalendarPlugin` in your Filament Panel Provider (usually `AdminPanelProvider.php`). This will automatically register both the `CalendarWidget` and the `EventResource`.
 
 ```php
-use Matondojk\FilamentCalendar\Widgets\CalendarWidget;
+use Matondojk\FilamentCalendar\FilamentCalendarPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         // ...
-        ->widgets([
-            Widgets\AccountWidget::class,
-            Widgets\FilamentInfoWidget::class,
-            CalendarWidget::class,
+        ->plugins([
+            FilamentCalendarPlugin::make(),
         ]);
 }
 ```
 
-Or registering in a specific Page (e.g. `Dashboard.php`):
+If you prefer to register the widget manually in a specific page without registering the plugin globally:
 
 ```php
 use Matondojk\FilamentCalendar\Widgets\CalendarWidget;
@@ -63,7 +65,13 @@ protected function getWidgets(): array
 }
 ```
 
-The calendar will automatically pull events using the default `Event` model provided by the package.
+## Configuration
+
+In `config/filament-calendar.php`, you can customize how the package behaves:
+
+- `is_enabled`: Set to `false` to prevent the package from registering the default `EventResource`. This is useful if you publish the resource to customize it and don't want the package to map it.
+- `should_register_navigation`: Show or hide the Event Resource from the main sidebar.
+- `navigation_sort`: Control where the Event Resource appears in the sidebar.
 
 ## Customizing the Event Resource
 

@@ -29,6 +29,10 @@ class FilamentCalendarServiceProvider extends ServiceProvider
                 __DIR__ . '/../src/Resources/Events' => app_path('Filament/Resources/EventResource'),
             ], 'filament-calendar-resource');
 
+            $this->publishes([
+                __DIR__ . '/../config/filament-calendar.php' => config_path('filament-calendar.php'),
+            ], 'filament-calendar-config');
+
             $this->commands([
                 \Matondojk\FilamentCalendar\Commands\PublishResourceCommand::class,
             ]);
@@ -41,6 +45,8 @@ class FilamentCalendarServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        //
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/filament-calendar.php', 'filament-calendar'
+        );
     }
 }

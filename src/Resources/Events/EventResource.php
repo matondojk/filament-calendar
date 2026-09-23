@@ -21,6 +21,16 @@ class EventResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config('filament-calendar.should_register_navigation', true);
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return config('filament-calendar.navigation_sort', 1);
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('filament-calendar::events.resource.navigation_label');
