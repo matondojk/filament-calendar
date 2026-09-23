@@ -17,10 +17,10 @@ class EventForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
-            ->columns(['default' => 1, 'md' => 3])
+            ->columns(3)
             ->components([
                 \Filament\Schemas\Components\Group::make()
-                    ->columnSpan(['default' => 1, 'md' => 2])
+                    ->columnSpan(2)
                     ->schema([
                         Section::make(fn() => __('filament-calendar::events.resource.form.event_details'))
                             ->icon('heroicon-o-information-circle')
@@ -50,7 +50,7 @@ class EventForm
                     ]),
 
                 \Filament\Schemas\Components\Group::make()
-                    ->columnSpan(['default' => 1, 'md' => 1])
+                    ->columnSpan(1)
                     ->schema([
                         Section::make(fn() => __('filament-calendar::events.resource.form.format'))
                             ->icon('heroicon-o-map-pin')
