@@ -1,43 +1,60 @@
 # Filament Event Calendar
 
-A robust and customizable calendar plugin designed specifically for **Filament v5**.
+A professional, fully customizable, and responsive event management plugin designed specifically for Filament v5.
+
+## Screenshots
+
+**Calendar Dashboard Widget:**
+![Calendar Widget](screenshots/calendar-widget.jpeg)
+
+**Events Table & Views:**
+![All Events View](screenshots/all-events-view.jpeg)
+
+**Google Calendar Integration:**
+![Adding Event to Google Calendar](screenshots/adding-event-to-google-calendar.jpeg)
+
+## Features
+
+- **In-Person and Virtual Events:** Create physical events with locations, or virtual meetings with direct links (Google Meet, Zoom, Teams, etc.).
+- **Smart Visibility & Invitations:** Users only see events they created or events they have been explicitly invited to.
+- **RSVP Tracking:** Invited users can confirm or decline their presence directly through the calendar.
+- **Automated Email Notifications:** The system sends an email invitation automatically when users are added to an event.
+- **Daily Reminders:** Configurable job to send warnings 24 hours before an event starts.
+- **Google Calendar Integration:** Allows attendees to add the event (including dates, description, and link/location) directly to their personal Google Calendar with a single click.
+- **Perfect UI Integration:** Matches the native Filament v5 Zinc theme seamlessly in both Light and Dark modes.
 
 ## Requirements
 
-- Laravel
+- PHP 8.2+
+- Laravel 10.0+ / 11.0+
 - Filament v5
 
 ## Installation
 
-You can install the package via composer:
+You can install the package via Composer:
 
 ```bash
 composer require matondojk/filament-event-calendar
 ```
 
-You must run the migrations for the calendar events to work properly. You can publish and run them with:
+Publish and run the migrations to create the required database tables (`events` and `event_user`):
 
 ```bash
 php artisan vendor:publish --tag="filament-event-calendar-migrations"
 php artisan migrate
 ```
 
-Optionally, you can publish the views and translations using:
-
-```bash
-php artisan vendor:publish --tag="filament-event-calendar-views"
-php artisan vendor:publish --tag="filament-event-calendar-translations"
-```
-
-You can also publish the configuration file to customize the plugin's behavior:
+Optionally, you can publish the configuration file to customize the resource visibility and menu sorting:
 
 ```bash
 php artisan vendor:publish --tag="filament-event-calendar-config"
 ```
 
-## Usage
+## Plugin Registration
 
-To use the calendar, register the `FilamentEventCalendarPlugin` in your Filament Panel Provider (usually `AdminPanelProvider.php`). This will automatically register both the `CalendarWidget` and the `EventResource`.
+To use the calendar widget and the event resource, you must register the plugin in your Filament panel configuration.
+
+Open your `app/Providers/Filament/AdminPanelProvider.php` and add the plugin:
 
 ```php
 use Matondojk\FilamentEventCalendar\FilamentEventCalendarPlugin;
@@ -52,53 +69,56 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-If you prefer to register the widget manually in a specific page without registering the plugin globally:
+## Scheduling Reminders
+
+The package includes a job (`EventReminderJob`) that checks for upcoming events exactly 24 hours before they start. It sends both database notifications and email reminders to all confirmed or pending guests.
+
+To enable this feature, you must schedule the job to run hourly. 
+
+If you are using Laravel 11, add the following to your `routes/console.php`:
 
 ```php
-use Matondojk\FilamentEventCalendar\Widgets\CalendarWidget;
+use Matondojk\FilamentEventCalendar\Jobs\EventReminderJob;
+use Illuminate\Support\Facades\Schedule;
 
-protected function getWidgets(): array
+Schedule::job(new EventReminderJob)->hourly();
+```
+
+If you are using Laravel 10, add it to the `schedule` method in `app/Console/Kernel.php`:
+
+```php
+protected function schedule(Schedule $schedule): void
 {
-    return [
-        CalendarWidget::class,
-    ];
+    $schedule->job(new \Matondojk\FilamentEventCalendar\Jobs\EventReminderJob)->hourly();
 }
 ```
 
+*Note: Ensure your server has the Laravel scheduler configured (cron).*
+
 ## Configuration
 
-In `config/filament-event-calendar.php`, you can customize how the package behaves:
+If you published the configuration file, it will be located at `config/filament-event-calendar.php`. 
 
-- `should_register_navigation`: Show or hide the Event Resource from the main sidebar.
-- `navigation_sort`: Control where the Event Resource appears in the sidebar.
+You can define if the `EventResource` should appear in the left sidebar and in which position:
 
-## Customizing the Event Resource
+```php
+return [
+    // Determine if the Events link should appear in the navigation menu.
+    'should_register_navigation' => true,
 
-If you need to customize the table columns, form fields, or logic of the Event Resource, you can publish the complete resource directly into your application's `app/Filament/Resources` directory by running:
-
-```bash
-php artisan filament-event-calendar:publish-resource
+    // Set the navigation sort order for the Events link.
+    'navigation_sort' => 1,
+];
 ```
 
-This command will copy the `EventResource` (along with its Pages, Schemas, and Tables) and automatically update all the namespaces to match your App namespace. After running this, you'll find the customizable resource at `app/Filament/Resources/EventResource/EventResource.php`!
+## Usage Concepts
 
-## Changelog
+### Visibility and Privacy
+Privacy is built-in by default. When an event is created, it belongs to the creator. The event will only appear on the calendar and table of the creator and the guests selected in the "Participants" field. The filtering tabs allow users to quickly switch between "All Events", "My Events", and "Invited".
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-If you discover any security related issues, please email instead of using the issue tracker.
-
-## Credits
-
-- [matondojk](https://github.com/matondojk)
-- [All Contributors](../../contributors)
+### Google Calendar Integration
+When an event is viewed, a button to "Add to Google Calendar" is presented. This button dynamically generates a URL populated with the event's title, description, start/end dates, and location (or virtual meeting link). Clicking it opens the Google Calendar creation page pre-filled.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT).
