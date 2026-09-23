@@ -25,6 +25,10 @@ class FilamentCalendarServiceProvider extends ServiceProvider
                 __DIR__ . '/../database/migrations' => database_path('migrations'),
             ], 'filament-calendar-migrations');
         }
+
+        \Filament\Support\Facades\FilamentAsset::register([
+            \Filament\Support\Assets\Css::make('filament-calendar-styles', __DIR__ . '/../resources/dist/calendar.css'),
+        ], 'matondojk/filament-calendar');
     }
 
     public function register(): void
