@@ -1,13 +1,13 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Resources\Events;
+namespace Matondojk\FilamentEventCalendar\Resources\Events;
 
-use Matondojk\FilamentCalendar\Resources\Events\Pages\CreateEvent;
-use Matondojk\FilamentCalendar\Resources\Events\Pages\EditEvent;
-use Matondojk\FilamentCalendar\Resources\Events\Pages\ListEvents;
-use Matondojk\FilamentCalendar\Resources\Events\Schemas\EventForm;
-use Matondojk\FilamentCalendar\Resources\Events\Tables\EventsTable;
-use Matondojk\FilamentCalendar\Models\Event;
+use Matondojk\FilamentEventCalendar\Resources\Events\Pages\CreateEvent;
+use Matondojk\FilamentEventCalendar\Resources\Events\Pages\EditEvent;
+use Matondojk\FilamentEventCalendar\Resources\Events\Pages\ListEvents;
+use Matondojk\FilamentEventCalendar\Resources\Events\Schemas\EventForm;
+use Matondojk\FilamentEventCalendar\Resources\Events\Tables\EventsTable;
+use Matondojk\FilamentEventCalendar\Models\Event;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -23,27 +23,27 @@ class EventResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('filament-calendar.should_register_navigation', true);
+        return config('filament-event-calendar.should_register_navigation', true);
     }
 
     public static function getNavigationSort(): ?int
     {
-        return config('filament-calendar.navigation_sort', 1);
+        return config('filament-event-calendar.navigation_sort', 1);
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('filament-calendar::events.resource.navigation_label');
+        return __('filament-event-calendar::events.resource.navigation_label');
     }
 
     public static function getModelLabel(): string
     {
-        return __('filament-calendar::events.resource.model_label');
+        return __('filament-event-calendar::events.resource.model_label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('filament-calendar::events.resource.plural_model_label');
+        return __('filament-event-calendar::events.resource.plural_model_label');
     }
 
     protected static ?string $recordTitleAttribute = 'title';

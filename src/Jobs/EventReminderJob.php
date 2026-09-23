@@ -1,8 +1,8 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Jobs;
+namespace Matondojk\FilamentEventCalendar\Jobs;
 
-use Matondojk\FilamentCalendar\Models\Event;
+use Matondojk\FilamentEventCalendar\Models\Event;
 use Carbon\Carbon;
 use Filament\Notifications\Notification;
 use Illuminate\Bus\Queueable;
@@ -31,23 +31,23 @@ class EventReminderJob implements ShouldQueue
             foreach ($event->users as $user) {
                 // Database notification
                 Notification::make()
-                    ->title(__('filament-calendar::events.notifications.reminder_title', ['title' => $event->title]))
-                    ->body(__('filament-calendar::events.notifications.reminder_body', ['date' => $event->starts_at->translatedFormat('M j, Y H:i')]))
+                    ->title(__('filament-event-calendar::events.notifications.reminder_title', ['title' => $event->title]))
+                    ->body(__('filament-event-calendar::events.notifications.reminder_body', ['date' => $event->starts_at->translatedFormat('M j, Y H:i')]))
                     ->warning()
                     ->sendToDatabase($user);
 
                 // Email notification (simple raw email for reminder)
                 $locationStr = $event->format === 'virtual' 
-                    ? __('filament-calendar::calendar.labels.meeting_link') . ': ' . $event->meeting_link 
-                    : __('filament-calendar::calendar.labels.location') . ': ' . $event->location;
+                    ? __('filament-event-calendar::calendar.labels.meeting_link') . ': ' . $event->meeting_link 
+                    : __('filament-event-calendar::calendar.labels.location') . ': ' . $event->location;
                     
-                Mail::raw(__('filament-calendar::events.emails.reminder_body', [
+                Mail::raw(__('filament-event-calendar::events.emails.reminder_body', [
                     'title' => $event->title,
                     'date' => $event->starts_at->translatedFormat('M j, Y H:i'),
                     'location' => $locationStr
                 ]), function ($message) use ($user, $event) {
                     $message->to($user->email)
-                        ->subject(__('filament-calendar::events.emails.reminder_subject', ['title' => $event->title]));
+                        ->subject(__('filament-event-calendar::events.emails.reminder_subject', ['title' => $event->title]));
                 });
             }
         }

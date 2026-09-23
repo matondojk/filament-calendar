@@ -1,4 +1,4 @@
-# Filament Calendar
+# Filament Event Calendar
 
 A robust and customizable calendar plugin designed specifically for **Filament v5**.
 
@@ -12,42 +12,42 @@ A robust and customizable calendar plugin designed specifically for **Filament v
 You can install the package via composer:
 
 ```bash
-composer require matondojk/filament-calendar
+composer require matondojk/filament-event-calendar
 ```
 
 You must run the migrations for the calendar events to work properly. You can publish and run them with:
 
 ```bash
-php artisan vendor:publish --tag="filament-calendar-migrations"
+php artisan vendor:publish --tag="filament-event-calendar-migrations"
 php artisan migrate
 ```
 
 Optionally, you can publish the views and translations using:
 
 ```bash
-php artisan vendor:publish --tag="filament-calendar-views"
-php artisan vendor:publish --tag="filament-calendar-translations"
+php artisan vendor:publish --tag="filament-event-calendar-views"
+php artisan vendor:publish --tag="filament-event-calendar-translations"
 ```
 
 You can also publish the configuration file to customize the plugin's behavior:
 
 ```bash
-php artisan vendor:publish --tag="filament-calendar-config"
+php artisan vendor:publish --tag="filament-event-calendar-config"
 ```
 
 ## Usage
 
-To use the calendar, register the `FilamentCalendarPlugin` in your Filament Panel Provider (usually `AdminPanelProvider.php`). This will automatically register both the `CalendarWidget` and the `EventResource`.
+To use the calendar, register the `FilamentEventCalendarPlugin` in your Filament Panel Provider (usually `AdminPanelProvider.php`). This will automatically register both the `CalendarWidget` and the `EventResource`.
 
 ```php
-use Matondojk\FilamentCalendar\FilamentCalendarPlugin;
+use Matondojk\FilamentEventCalendar\FilamentEventCalendarPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         // ...
         ->plugins([
-            FilamentCalendarPlugin::make(),
+            FilamentEventCalendarPlugin::make(),
         ]);
 }
 ```
@@ -55,7 +55,7 @@ public function panel(Panel $panel): Panel
 If you prefer to register the widget manually in a specific page without registering the plugin globally:
 
 ```php
-use Matondojk\FilamentCalendar\Widgets\CalendarWidget;
+use Matondojk\FilamentEventCalendar\Widgets\CalendarWidget;
 
 protected function getWidgets(): array
 {
@@ -67,7 +67,7 @@ protected function getWidgets(): array
 
 ## Configuration
 
-In `config/filament-calendar.php`, you can customize how the package behaves:
+In `config/filament-event-calendar.php`, you can customize how the package behaves:
 
 - `should_register_navigation`: Show or hide the Event Resource from the main sidebar.
 - `navigation_sort`: Control where the Event Resource appears in the sidebar.
@@ -77,7 +77,7 @@ In `config/filament-calendar.php`, you can customize how the package behaves:
 If you need to customize the table columns, form fields, or logic of the Event Resource, you can publish the complete resource directly into your application's `app/Filament/Resources` directory by running:
 
 ```bash
-php artisan filament-calendar:publish-resource
+php artisan filament-event-calendar:publish-resource
 ```
 
 This command will copy the `EventResource` (along with its Pages, Schemas, and Tables) and automatically update all the namespaces to match your App namespace. After running this, you'll find the customizable resource at `app/Filament/Resources/EventResource/EventResource.php`!

@@ -1,8 +1,8 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Mail;
+namespace Matondojk\FilamentEventCalendar\Mail;
 
-use Matondojk\FilamentCalendar\Models\Event;
+use Matondojk\FilamentEventCalendar\Models\Event;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
@@ -19,14 +19,14 @@ class EventInvitationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('filament-calendar::events.emails.invitation_subject', ['title' => $this->event->title]),
+            subject: __('filament-event-calendar::events.emails.invitation_subject', ['title' => $this->event->title]),
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            markdown: 'filament-calendar::emails.events.invitation',
+            markdown: 'filament-event-calendar::emails.events.invitation',
             with: [
                 'event' => $this->event,
             ],

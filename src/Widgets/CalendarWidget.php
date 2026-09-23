@@ -1,8 +1,8 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Widgets;
+namespace Matondojk\FilamentEventCalendar\Widgets;
 
-use Matondojk\FilamentCalendar\Models\Event;
+use Matondojk\FilamentEventCalendar\Models\Event;
 use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -11,7 +11,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Widgets\Widget;
-use Matondojk\FilamentCalendar\Resources\Events\Schemas\EventForm;
+use Matondojk\FilamentEventCalendar\Resources\Events\Schemas\EventForm;
 use Filament\Actions\CreateAction;
 use Filament\Schemas\Schema;
 // Actually we'll pivot via relation
@@ -26,7 +26,7 @@ class CalendarWidget extends Widget implements HasActions, HasForms
 
     protected int | string | array $columnSpan = 'full';
 
-    protected string $view = 'filament-calendar::widgets.calendar-widget';
+    protected string $view = 'filament-event-calendar::widgets.calendar-widget';
 
     public $currentMonth;
 
@@ -37,8 +37,8 @@ class CalendarWidget extends Widget implements HasActions, HasForms
     public function createEventAction(): Action
     {
         return CreateAction::make('createEvent')
-            ->label(__('filament-calendar::events.resource.actions.create_event'))
-            ->modalHeading(__('filament-calendar::events.resource.actions.create_event'))
+            ->label(__('filament-event-calendar::events.resource.actions.create_event'))
+            ->modalHeading(__('filament-event-calendar::events.resource.actions.create_event'))
             ->modalWidth('4xl')
             ->icon('heroicon-m-plus')
             ->model(Event::class)
@@ -135,14 +135,14 @@ class CalendarWidget extends Widget implements HasActions, HasForms
             ->hiddenLabel()
             ->modalIcon('heroicon-o-calendar-days')
             ->modalHeading(fn (array $arguments) => Event::find($arguments['event_id'])?->title)
-            ->modalContent(fn (array $arguments) => view('filament-calendar::widgets.event-details-modal', [
+            ->modalContent(fn (array $arguments) => view('filament-event-calendar::widgets.event-details-modal', [
                 'event' => Event::with(['users' => fn ($q) => $q->where('users.id', auth()->id())])->find($arguments['event_id']),
             ]))
             ->modalSubmitAction(false)
             ->modalCancelAction(false)
             ->extraModalFooterActions(fn (array $arguments) => [
                 Action::make('googleCalendar')
-                    ->label(fn () => __('filament-calendar::calendar.actions.add_to_google'))
+                    ->label(fn () => __('filament-event-calendar::calendar.actions.add_to_google'))
                     ->color('gray')
                     ->icon('heroicon-o-calendar-days')
                     ->url(function () use ($arguments) {
@@ -169,7 +169,7 @@ class CalendarWidget extends Widget implements HasActions, HasForms
                     })
                     ->openUrlInNewTab(),
                 Action::make('confirm')
-                    ->label(fn () => __('filament-calendar::calendar.actions.confirm_rsvp'))
+                    ->label(fn () => __('filament-event-calendar::calendar.actions.confirm_rsvp'))
                     ->color('success')
                     ->visible(function () use ($arguments) {
                         $event = Event::with(['users' => fn ($q) => $q->where('users.id', auth()->id())])->find($arguments['event_id']);
@@ -180,11 +180,11 @@ class CalendarWidget extends Widget implements HasActions, HasForms
                         $event = Event::find($arguments['event_id']);
                         if ($event) {
                             $event->users()->updateExistingPivot(auth()->id(), ['rsvp_status' => 'confirmed']);
-                            Notification::make()->title(__('filament-calendar::calendar.notifications.confirmed'))->success()->send();
+                            Notification::make()->title(__('filament-event-calendar::calendar.notifications.confirmed'))->success()->send();
                         }
                     }),
                 Action::make('decline')
-                    ->label(fn () => __('filament-calendar::calendar.actions.decline'))
+                    ->label(fn () => __('filament-event-calendar::calendar.actions.decline'))
                     ->color('danger')
                     ->visible(function () use ($arguments) {
                         $event = Event::with(['users' => fn ($q) => $q->where('users.id', auth()->id())])->find($arguments['event_id']);
@@ -195,7 +195,7 @@ class CalendarWidget extends Widget implements HasActions, HasForms
                         $event = Event::find($arguments['event_id']);
                         if ($event) {
                             $event->users()->updateExistingPivot(auth()->id(), ['rsvp_status' => 'declined']);
-                            Notification::make()->title(__('filament-calendar::calendar.notifications.declined'))->danger()->send();
+                            Notification::make()->title(__('filament-event-calendar::calendar.notifications.declined'))->danger()->send();
                         }
                     }),
             ]);

@@ -1,9 +1,9 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Resources\Events\Pages;
+namespace Matondojk\FilamentEventCalendar\Resources\Events\Pages;
 
-use Matondojk\FilamentCalendar\Resources\Events\EventResource;
-use Matondojk\FilamentCalendar\Jobs\SendEventInvitationJob;
+use Matondojk\FilamentEventCalendar\Resources\Events\EventResource;
+use Matondojk\FilamentEventCalendar\Jobs\SendEventInvitationJob;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateEvent extends CreateRecord

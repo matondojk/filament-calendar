@@ -1,5 +1,5 @@
 {
-    "name": "matondojk/filament-calendar",
+    "name": "matondojk/filament-event-calendar",
     "description": "Um widget de calendário interativo e responsivo para Filament PHP.",
     "type": "library",
     "license": "MIT",
@@ -16,13 +16,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Matondojk\\FilamentCalendar\\": "src/"
+            "Matondojk\\FilamentEventCalendar\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Matondojk\\FilamentCalendar\\FilamentCalendarServiceProvider"
+                "Matondojk\\FilamentEventCalendar\\FilamentEventCalendarServiceProvider"
             ]
         }
     },

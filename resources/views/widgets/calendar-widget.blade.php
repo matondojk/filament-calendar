@@ -10,7 +10,7 @@
                         {{ Str::ucfirst(\Carbon\Carbon::create($currentYear, $currentMonth, 1)->translatedFormat('F Y')) }}
                     </h2>
                     <p class="text-sm font-medium text-gray-500 dark:text-zinc-400 mt-1">
-                        {{ __('filament-calendar::calendar.widget_subtitle') }}
+                        {{ __('filament-event-calendar::calendar.widget_subtitle') }}
                     </p>
                 </div>
             </div>
@@ -19,9 +19,9 @@
                 <div class="w-40">
                     <x-filament::input.wrapper>
                         <x-filament::input.select wire:model.live="filter">
-                            <option value="all">{{ __('filament-calendar::events.resource.tabs.all') }}</option>
-                            <option value="my_events">{{ __('filament-calendar::events.resource.tabs.my_events') }}</option>
-                            <option value="invited">{{ __('filament-calendar::events.resource.tabs.invited') }}</option>
+                            <option value="all">{{ __('filament-event-calendar::events.resource.tabs.all') }}</option>
+                            <option value="my_events">{{ __('filament-event-calendar::events.resource.tabs.my_events') }}</option>
+                            <option value="invited">{{ __('filament-event-calendar::events.resource.tabs.invited') }}</option>
                         </x-filament::input.select>
                     </x-filament::input.wrapper>
                 </div>
@@ -29,16 +29,16 @@
                 {{ $this->createEventAction }}
                 
                 <x-filament::button.group>
-                    <x-filament::button wire:click="previousMonth" color="gray" size="sm" icon="heroicon-m-chevron-left" tooltip="{{ __('filament-calendar::calendar.previous') }}">
+                    <x-filament::button wire:click="previousMonth" color="gray" size="sm" icon="heroicon-m-chevron-left" tooltip="{{ __('filament-event-calendar::calendar.previous') }}">
                     </x-filament::button>
-                    <x-filament::button wire:click="nextMonth" color="gray" size="sm" icon="heroicon-m-chevron-right" tooltip="{{ __('filament-calendar::calendar.next') }}">
+                    <x-filament::button wire:click="nextMonth" color="gray" size="sm" icon="heroicon-m-chevron-right" tooltip="{{ __('filament-event-calendar::calendar.next') }}">
                     </x-filament::button>
                 </x-filament::button.group>
             </div>
         </div>
 
         <div class="grid gap-px bg-gray-200 dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm ring-1 ring-gray-200 dark:ring-zinc-800" style="grid-template-columns: repeat(7, minmax(0, 1fr));">
-            @foreach ([__('filament-calendar::calendar.days.sun'), __('filament-calendar::calendar.days.mon'), __('filament-calendar::calendar.days.tue'), __('filament-calendar::calendar.days.wed'), __('filament-calendar::calendar.days.thu'), __('filament-calendar::calendar.days.fri'), __('filament-calendar::calendar.days.sat')] as $dayName)
+            @foreach ([__('filament-event-calendar::calendar.days.sun'), __('filament-event-calendar::calendar.days.mon'), __('filament-event-calendar::calendar.days.tue'), __('filament-event-calendar::calendar.days.wed'), __('filament-event-calendar::calendar.days.thu'), __('filament-event-calendar::calendar.days.fri'), __('filament-event-calendar::calendar.days.sat')] as $dayName)
                 <div class="bg-gray-50 dark:bg-zinc-800/50 p-2 text-center text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">
                     {{ Str::substr($dayName, 0, 3) }}
                 </div>

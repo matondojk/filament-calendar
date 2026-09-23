@@ -1,9 +1,9 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Models;
+namespace Matondojk\FilamentEventCalendar\Models;
 
-use Matondojk\FilamentCalendar\Jobs\SendEventInvitationJob;
-use Matondojk\FilamentCalendar\Models\Event;
+use Matondojk\FilamentEventCalendar\Jobs\SendEventInvitationJob;
+use Matondojk\FilamentEventCalendar\Models\Event;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Commands;
+namespace Matondojk\FilamentEventCalendar\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
 class PublishResourceCommand extends Command
 {
-    protected $signature = 'filament-calendar:publish-resource';
+    protected $signature = 'filament-event-calendar:publish-resource';
     protected $description = 'Publish the EventResource to your application';
 
     public function handle()
@@ -28,12 +28,12 @@ class PublishResourceCommand extends Command
         foreach ($files as $file) {
             $contents = File::get($file);
             $contents = str_replace(
-                'namespace Matondojk\FilamentCalendar\Resources\Events',
+                'namespace Matondojk\FilamentEventCalendar\Resources\Events',
                 'namespace App\Filament\Resources\EventResource',
                 $contents
             );
             $contents = str_replace(
-                'use Matondojk\FilamentCalendar\Resources\Events\\',
+                'use Matondojk\FilamentEventCalendar\Resources\Events\\',
                 'use App\Filament\Resources\EventResource\\',
                 $contents
             );

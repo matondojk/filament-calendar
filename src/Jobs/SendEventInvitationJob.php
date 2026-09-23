@@ -1,9 +1,9 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Jobs;
+namespace Matondojk\FilamentEventCalendar\Jobs;
 
-use Matondojk\FilamentCalendar\Mail\EventInvitationMail;
-use Matondojk\FilamentCalendar\Models\Event;
+use Matondojk\FilamentEventCalendar\Mail\EventInvitationMail;
+use Matondojk\FilamentEventCalendar\Models\Event;
 use Filament\Notifications\Notification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,8 +27,8 @@ class SendEventInvitationJob implements ShouldQueue
         foreach ($this->users as $user) {
             // Send Filament Database Notification
             Notification::make()
-                ->title(__('filament-calendar::events.notifications.new_invitation_title', ['title' => $this->event->title]))
-                ->body(__('filament-calendar::events.notifications.new_invitation_body', ['date' => $this->event->starts_at->translatedFormat('M j, Y')]))
+                ->title(__('filament-event-calendar::events.notifications.new_invitation_title', ['title' => $this->event->title]))
+                ->body(__('filament-event-calendar::events.notifications.new_invitation_body', ['date' => $this->event->starts_at->translatedFormat('M j, Y')]))
                 ->success()
                 ->sendToDatabase($user);
 

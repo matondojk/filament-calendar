@@ -1,8 +1,8 @@
 <?php
 
-namespace Matondojk\FilamentCalendar\Models;
+namespace Matondojk\FilamentEventCalendar\Models;
 
-use Matondojk\FilamentCalendar\Jobs\SendEventInvitationJob;
+use Matondojk\FilamentEventCalendar\Jobs\SendEventInvitationJob;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Database\Eloquent\BroadcastsEvents;
