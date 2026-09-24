@@ -134,7 +134,7 @@ When an event is viewed, a button to "Add to Google Calendar" is presented. This
 
 ## Support the Project
 
-If you find this plugin useful, please consider leaving a star on the GitHub repository. Your support helps the project grow and reach more developers!
+If you find this plugin useful, please consider leaving a star (⭐️) on the GitHub repository. Your support helps the project grow and reach more developers!
 
 ## License
 
