@@ -132,6 +132,10 @@ Privacy is built-in by default. When an event is created, it belongs to the crea
 ### Google Calendar Integration
 When an event is viewed, a button to "Add to Google Calendar" is presented. This button dynamically generates a URL populated with the event's title, description, start/end dates, and location (or virtual meeting link). Clicking it opens the Google Calendar creation page pre-filled.
 
+## Support the Project
+
+If you find this plugin useful, please consider leaving a star on the GitHub repository. Your support helps the project grow and reach more developers!
+
 ## License
 
 The MIT License (MIT).
