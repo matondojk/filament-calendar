@@ -46,7 +46,7 @@
 
             @foreach ($this->days as $day)
                 <div class="bg-white dark:bg-zinc-900 p-1.5 flex flex-col gap-1 {{ $day['isCurrentMonth'] ? '' : 'opacity-50 bg-gray-50 dark:bg-zinc-800/50' }}" style="min-height: 100px;">
-                    <div class="font-bold text-xs mb-1 {{ $day['date']->isToday() ? 'flex items-center justify-center w-7 h-7 rounded-full bg-warning-500 text-white dark:text-zinc-900 shadow-md mx-auto sm:mx-0 sm:ml-0.5' : 'text-center sm:text-left sm:ml-1 text-gray-700 dark:text-zinc-300' }}">
+                    <div class="font-bold text-xs mb-1 {{ $day['date']->isToday() ? 'flex items-center justify-center w-7 h-7 rounded-full bg-orange-500 text-white shadow-md mx-auto sm:mx-0 sm:ml-0.5' : 'text-center sm:text-left sm:ml-1 text-gray-700 dark:text-zinc-300' }}">
                         {{ $day['date']->format('j') }}
                     </div>
                     
